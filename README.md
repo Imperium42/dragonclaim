@@ -84,6 +84,11 @@ Players react to an embed, verify their linked Steam account through Discord OAu
 | **Runs itself**           | A giveaway ends on its own when the timer runs out or the last key is claimed, and the public embed is edited to show that it concluded.                                                                                                                                                                      |
 | **Yours to host**         | One YAML file configures everything, including every user-facing string, emote and embed color. [MPL-2.0](LICENSE) licensed.                                                                                                                                                                                  |
 
+> [!TIP]
+> **Battle-tested:** Dragonclaim was originally proven in production as
+> [Thronebot](https://imperium42.com/project/thronebot), the Throne of Lies Discord bot, giving
+> away **1,000 Steam keys** to real players.
+
 The story behind it is in the blog post
 [The 1st smart Steam key giveaway bot](https://imperium42.com/posts/the-1st-smart-steam-key-giveaway-bot).
 
