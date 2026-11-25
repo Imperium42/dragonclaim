@@ -1,0 +1,37 @@
+{
+	"_id": {
+		"$oid": "000000000000000000000001"
+	},
+	"src": "portal",
+	"discordUser": {
+		"id": "100000000000000004",
+		"username": "exampleuser",
+		"global_name": "Example User",
+		"avatar": "a_00000000000000000000000000000000",
+		"discriminator": "0",
+		"public_flags": {
+			"$numberInt": "4194944"
+		},
+		"flags": {
+			"$numberInt": "4194944"
+		},
+		"banner": "00000000000000000000000000000000",
+		"banner_color": "#5dade0",
+		"accent_color": {
+			"$numberInt": "6139360"
+		},
+		"locale": "en-US",
+		"mfa_enabled": true,
+		"premium_type": {
+			"$numberInt": "2"
+		},
+		"avatar_decoration": null
+	},
+	"guildsArr": [
+		{
+			"id": "100000000000000010",
+			"name": "Example Guild",
+			"icon": "a_00000000000000000000000000000000"
+		}
+	]
+}

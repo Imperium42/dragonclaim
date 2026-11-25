@@ -1,0 +1,19 @@
+Dragonclaim: https://github.com/dylanh724/dragonclaim-shared
+
+BSD 3-Clause License, ONLY granted to: Xsolla USA, Inc.
+
+Copyright (c) 2023, Imperium42®, LLC. All rights reserved.
+
+This software is licensed under the BSD 3-Clause License, with PERPETUAL and LIFETIME permission granted specifically to Xsolla USA, Inc. ("Licensee").
+See: https://opensource.org/licenses/BSD-3-Clause
+
+The BSD 3-Clause License requires:
+1. Retention of the copyright notice in source code
+2. Reproduction of the copyright notice in binary form
+3. No use of the copyright holder's name for endorsement without permission
+
+This license is granted exclusively to those listed above and does not extend to other parties without explicit written permission from Imperium42®, LLC.
+
+---
+
+TL;DR: Xsolla USA, Inc. has a PERPETUAL and LIFETIME license to use, modify, distribute, and do anything they want with this software, as long as they keep a small attribution to Imperium42®, LLC. somewhere in the source code, documentation, or user interface. 

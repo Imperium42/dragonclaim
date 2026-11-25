@@ -1,0 +1,228 @@
+{
+	"_id": "100000000000000001",
+	"config": {
+		"common": {
+			"discordBotClientId": "100000000000000005",
+			"supportEmail": "SUPPORT@YOURSITE.com",
+			"homeUrl": "https://www.imperium42.com",
+			"company256ImgUrl": "https://i.imgur.com/xzqizFW.png",
+			"iconUrls": {
+				"companyIcon256Url": "https://i.imgur.com/bGuh7AZ.png",
+				"steamIcon512Url": "https://i.imgur.com/3l3pD0F.png",
+				"keyIcon128Url": "https://i.imgur.com/PCn9o8F.png"
+			},
+			"hexColors": {
+				"blueHexStr": "#308EF2",
+				"lightBlueHexStr": "#0099FF",
+				"seaGreenHexStr": "#5AF252",
+				"indigoHexStr": "#AA017D"
+			}
+		},
+		"prefs": {
+			"logBotReplies": false,
+			"resumeLiveGiveawaysOnReady": false,
+			"showJsonInReply": false,
+			"skipBlacklistIfMod": true,
+			"extraLogs": true,
+			"cmdPrefix": ".",
+			"printThisJsonOnInit": false,
+			"printThisYamlOnInit": false,
+			"displayGiveaway": {
+				"allowDupeEmbeds": true,
+				"logReactions": true,
+				"allowInitGiveawayToShowEvenNoKeys": false
+			},
+			"verification": {
+				"trustIfSteamOffline": true,
+				"allowMultiKeyClaimsAsWhitelistedMod": true
+			}
+		},
+		"timers": {
+			"pollingCooldownSecsLive": {
+				"$numberInt": "30"
+			},
+			"pollingCooldownSecsDev": {
+				"$numberInt": "10"
+			},
+			"pollingMsLive": {
+				"$numberInt": "300000"
+			},
+			"pollingMsDev": {
+				"$numberInt": "30000"
+			}
+		},
+		"hexColors": {
+			"blueHexStr": "#308EF2",
+			"lightBlueHexStr": "#0099FF",
+			"seaGreenHexStr": "#5AF252"
+		},
+		"adminEmails": [
+			"YOU@YOURSITE.COM"
+		],
+		"localServers": {
+			"dev": {
+				"ip": "localhost",
+				"port": "55554"
+			},
+			"live": {
+				"ip": "localhost",
+				"port": "55555"
+			}
+		},
+		"steam": {
+			"webApiKey": "YOUR_WEB_API_KEY",
+			"devApiKey": null,
+			"appId": "595280"
+		},
+		"mongodb": {
+			"dbName": "i42",
+			"uri": "mongodb+srv://YOUR_USER:YOUR_PASS@cluster0.YOUR_CLUSTER_ID.mongodb.net/YOUR_COL_NAME?retryWrites=true&w=majority"
+		},
+		"discordBot": {
+			"clientId": "100000000000000005",
+			"clientSecret": "your-secret-here",
+			"giveawayRedirectUri": "http://localhost:55554/discord/giveaway/authed",
+			"portalRedirectUri": "http://localhost:55554/discord/portal/authed"
+		},
+		"platforms": {
+			"discord": {
+				"guildId": "100000000000000001",
+				"modChatChannelId": "100000000000000006",
+				"modBotSpamChannelIds": [
+					"100000000000000002"
+				],
+				"modLogsChannelId": {
+					"$numberDouble": "100000000000000007.0"
+				},
+				"authedModRoleId": "100000000000000008",
+				"verifiedEndUserRoleId": "100000000000000009",
+				"emotes": {
+					"accessDeniedEmote": "🚫",
+					"failEmote": "❌",
+					"aliasEmote": "🥋",
+					"kbEmote": "📖",
+					"keyEmote": "🔑",
+					"outOfKeysEmote": "⌛",
+					"gameCtrlEmote": "🎮",
+					"lockEmote": "🔒",
+					"incomingDataEmote": "⬅",
+					"outgoingDataEmote": "➡",
+					"rightArrowEmote": "➡",
+					"successEmote": "✅",
+					"thinkingEmote": "🤔",
+					"warnEmote": "⚠",
+					"numberEmoteArr": [
+						"1️⃣",
+						"2️⃣",
+						"3️⃣",
+						"4️⃣",
+						"5️⃣"
+					],
+					"waitEmote": "⌛"
+				},
+				"richPresenceStatus": "dragonclaim.com"
+			}
+		},
+		"redis": {
+			"password": null
+		},
+		"tls": {
+			"privKeyPemPath": "",
+			"fullChainPemPath": ""
+		},
+		"locale": {
+			"modBotSpamChannelNotWhitelistedStr": "🚫 This channel is not whitelisted for mod bot spam.",
+			"generalIcons": {
+				"companyIcon256Url": "https://i.imgur.com/bGuh7AZ.png",
+				"steamIcon512Url": "https://i.imgur.com/3l3pD0F.png",
+				"keyIcon128Url": "https://i.imgur.com/PCn9o8F.png"
+			},
+			"giveawayConcluded": {
+				"giveawayConcludedTitleStr": "GIVEAWAY CONCLUDED",
+				"giveawayConcludedDescrStr": "⌛ Out of keys!\nThanks for participating",
+				"giveawayConcludedEmbedColorHexStr": "#AA017D",
+				"giveawayConcludedComeBackSoonImgUrl": "https://i.imgur.com/u6Cfr2V.png",
+				"eventNotFoundErrStr": "❌ Event %EVENT_NAME% not found."
+			},
+			"giveawayGeneralErrHtmlStr": "<p>This is a bit awkward, but it seems that you are disqualified in some form:</p><p>Perhaps you already claimed a key, did not meet the listed qualifications, or have an alt account detected?</p><p>Unfortunately, staff won't be able to assist with this (since it's an automated thing).</p>",
+			"giveawayGeneralErrDMStr": "🤔 This is a bit awkward, but it seems that you are disqualified in some form:\nPerhaps you already claimed a key, did not meet the listed qualifications, or have an alt account detected?\nUnfortunately, staff won't be able to assist with this (since it's an automated thing).",
+			"displayGiveawayDM": {
+				"dmAuthTitleStr": "➡ Verify Steam Link",
+				"dmAuthDescrStr": "🔑 After authenticated, I'll respond with a key!\nWe only collect your steamId, and you won't even need to leave Discord.",
+				"dmAuthThumbImgUrl": "https://i.imgur.com/3l3pD0F.png",
+				"dmAuthFooterStr": "Permission request to view your SteamID",
+				"dmAuthFooterImgUrl": "https://i.imgur.com/bGuh7AZ.png",
+				"dm500Errs": {
+					"dmErrServer": "<p>If you cancelled, you can always try again from your DM link.</p>",
+					"dmErrTryAgain": "<p>Perhaps try again.</p>",
+					"dmErrSomethingWentWrong": "<h3>🤔 Something went wrong</h3>",
+					"dmErrQuestions": "<p>💡 <b>Questions?</b> support@imperium42.com</p>",
+					"dmErrInternalSteamBlacklistMsg": "!Trusted by Steam",
+					"dmErrInternalAllKeysClaimedReasonStr": "All Keys Claimed (System)",
+					"dmErrAllKeysClaimedStr": "Gah, all available keys have been claimed!",
+					"dmErrAlreadyOwnStr": "<p>Seems like you <em>already</em> own the game -- well, this is awkward...</p>",
+					"dmErrSteamNotLinked": "<p>Your Steam account is not linked to Discord. Connect, then try again:</p><p><b>Users -> Connections -></b> Click the Steam logo.</b><p><img src='https://i.imgur.com/IJ88qSf.png' alt='connections'></p>",
+					"dmErrUnsuccessfulClaim": "Unsuccessful Claim: Perhaps a bug? Try again or tell a dev!",
+					"dmErr1PossiblyExpiredLinkNoState": "[1] Did you already claim a key? If not, the link may be expired! Try starting over~",
+					"dmErr2PossiblyExpiredLinkWithState": "[2] Did you already claim a key? If not, the link may be expired! Try starting over~"
+				},
+				"dmAuthSuccess": {
+					"dmSuccessContentHeresYourKey": "Your steam key:",
+					"dmSuccessHtmlStr": "<h2>Verified!</h2>\n<p>We just replied to your DM with a Steam key - don't forget to <a href=\"https://store.steampowered.com/account/registerkey?key=%STEAM_KEY%\">activate it</a>!</p>",
+					"dmAuthSuccessTitleStr": "✅ Verified!",
+					"dmAuthSuccessDescrStr": "Activate your key [on Steam](https://store.steampowered.com/account/registerkey?key=%STEAM_KEY%)",
+					"dmAuthSuccessDesktopPrimaryHeaderStr": "Desktop",
+					"dmAuthSuccessMobileOptionalHeaderStr": "Mobile",
+					"dmAuthSuccessDesktopPrimaryStr": null,
+					"dmAuthSuccessMobileOptionalStr": null,
+					"dmAuthSuccessThumbImgUrl": "https://i.imgur.com/3l3pD0F.png",
+					"dmAuthSuccessFooterStr": "Questions? support@imperium42.com",
+					"dmPlayerKeyStrObj": {
+						"dmActivateThisKeyOnSteamStr": "**Activate this key on Steam:**\n```less\n🔑```",
+						"dmAllVerifiedStr": "✅ You're all verified! Check your DM for the key."
+					}
+				},
+				"dmAuthExpired": {
+					"dmAuthExpiredTitleStr": "⚠ Link Expired",
+					"dmAuthExpiredDescrStr": "Try 'reacting' to the key [🔑] emote again",
+					"dmAuthExpiredColor": "#AA017D",
+					"dmAuthExpiredThumbImgUrl": "https://i.imgur.com/WUIhBYb.png"
+				}
+			},
+			"displayGiveawayEmbed": {
+				"displayGiveawayEmbedTitle": "➡ Steam Key Giveaway __RULES:__",
+				"displayGiveawayEmbedAuthor": {
+					"name": "Some Game Name",
+					"imgIconUrl": null,
+					"clickUrl": "https://www.imperium42.com"
+				},
+				"displayGiveawayEmbedThumbnailUrl": "https://i.imgur.com/C6PLQNt.png",
+				"displayGiveawayEmbedDescr": "React to enter!",
+				"displayGiveawayEmbedRulesArr": [
+					"1️⃣ Must have Steam linked to Discord.",
+					"2️⃣ Must not already own the game.",
+					"3️⃣ Must not be a 'limited' account"
+				],
+				"displayGiveawayEmbedInstructionsArr": [
+					"[🔑] React below to request a key.",
+					"<@100000000000000005> will DM you to verify Steam link.",
+					"<@100000000000000005> will DM your claimed key!"
+				],
+				"displayGiveawayEmbedFooter": {
+					"footerStr": "By entering, you agree to adhere to our terms @ https://i42.games/legal",
+					"footerImgIconUrl": "https://i.imgur.com/xzqizFW.png"
+				}
+			},
+			"unauthorized": "🚫 Unauthorized attempt logged.",
+			"cmds": {
+				"displayGiveawayCmd": {}
+			}
+		}
+	},
+	"configUpdateInfo": {
+		"utcTime": {
+			"$numberDouble": "1663601088177.0"
+		},
+		"uploadedByDiscordId": "system"
+	}
+}

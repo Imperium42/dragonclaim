@@ -1,0 +1,37 @@
+DEADJOE
+.sublime*
+*.sublime*
+/*/node_modules/
+*.csv
+secretKeys.js
+*.save
+*~
+*.pem
+*cert.pem
+*key.pem
+*.bak
+*cert-baks
+*.log
+\#.*
+node_modules
+data/*
+!data/schemas/
+# Submodule content should never be tracked in main repo
+data/dc-prod-secrets/*
+
+
+# data/config*.yml holds secrets: never un-ignore it (repo is MPL-2.0 / public-ready)
+!data/config.template.yml
+
+
+src/logs
+.idea/aws.xml
+dist
+.idea/inspectionProfiles
+.idea
+**/tsconfig.tsbuildinfo
+
+# Local env files (secrets)
+.env
+.env.*
+!.env.example

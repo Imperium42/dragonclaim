@@ -1,0 +1,66 @@
+{
+  "$jsonSchema": {
+    "bsonType": "object",
+    "required": ["_id"],
+    "properties": {
+      "_id": {
+        "bsonType": "string",
+        "description": "Discord guild ID"
+      },
+      "config": {
+        "bsonType": "object",
+        "description": "Guild configuration from config.yml"
+      },
+      "configUpdateInfo": {
+        "bsonType": "object",
+        "properties": {
+          "utcTime": {
+            "bsonType": ["long", "int", "double"],
+            "description": "Timestamp of last config update"
+          },
+          "uploadedByDiscordId": {
+            "bsonType": "string",
+            "description": "Discord ID of user who updated config"
+          }
+        }
+      },
+      "name": {
+        "bsonType": "string",
+        "description": "Guild name"
+      },
+      "settings": {
+        "bsonType": "object",
+        "properties": {
+          "prefix": {
+            "bsonType": "string",
+            "description": "Command prefix"
+          },
+          "modRoleId": {
+            "bsonType": "string",
+            "description": "Role ID for moderators"
+          },
+          "modChatChannelId": {
+            "bsonType": "string",
+            "description": "Channel ID for mod chat"
+          },
+          "modSpamChannelId": {
+            "bsonType": "string",
+            "description": "Channel ID for mod spam"
+          },
+          "modLogsChannelId": {
+            "bsonType": "string",
+            "description": "Channel ID for mod logs"
+          },
+          "verifiedEndUserRoleId": {
+            "bsonType": "string",
+            "description": "Role ID for verified users"
+          }
+        }
+      },
+      "createdAt": {
+        "bsonType": "date",
+        "description": "When the guild was added to the bot"
+      }
+    }
+  }
+}

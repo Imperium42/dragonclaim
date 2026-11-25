@@ -1,0 +1,19 @@
+# SPDX-License-Identifier: MPL-2.0
+# Copyright (c) Imperium42®, LLC.
+##############################################################################################
+# Runs redis *only*; not the app:
+# docker-compose -f docker-compose-redis.yml up -d --remove-orphans
+#
+# -d means "detached" mode, so you can close the terminal and it will keep running.
+# --remove-orphans means "don't keep old containers around if they're not in the new config"
+##############################################################################################
+services:
+  redis_db:
+    image: redis:8-alpine
+    restart: unless-stopped # auto-recover after crashes/host reboots
+    ports:
+      - "6380:6379"
+    networks:
+      default:
+        aliases:
+          - redis_db

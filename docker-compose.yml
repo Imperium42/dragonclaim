@@ -1,0 +1,53 @@
+# SPDX-License-Identifier: MPL-2.0
+# Copyright (c) Imperium42®, LLC.
+##############################################################################################
+# Runs redis + app:
+# docker-compose up -d --remove-orphans
+#
+# -d means "detached" mode, so you can close the terminal and it will keep running.
+# --remove-orphans means "don't keep old containers around if they're not in the new config"
+#
+# Connect via redis:
+##############################################################################################
+services:
+  app:
+    image: node:26.13.1-alpine
+    restart: unless-stopped # auto-recover after crashes/host reboots
+    volumes:
+      - ./:/usr/src/app
+    working_dir: /usr/src/app
+    environment:
+      DOCKER_ENV: "true" # services/redis.js keeps the `redis_db` hostname instead of localhost
+    command: sh -c "npm i -g bun@1.4.5 && bun install --frozen-lockfile && bun run build && bun run start-standalone"
+    ports:
+      - "55554:55554"
+    depends_on:
+      - redis_db
+      - mongodb # Comment out if using 3rd-party (eg: Atlas) instead of local mongodb
+    networks:
+      - app_network
+
+  redis_db:
+    image: redis:8-alpine
+    restart: unless-stopped # auto-recover after crashes/host reboots
+    ports:
+      - "6380:6379"
+    networks:
+      - app_network
+
+  # Comment out if using 3rd-party (eg: Atlas) instead of local mongodb
+  mongodb:
+    image: mongo:8
+    restart: unless-stopped # auto-recover after crashes/host reboots
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - app_network
+
+networks:
+  app_network:
+    driver: bridge
+
+# Comment out if using 3rd-party (eg: Atlas) instead of local mongodb
+volumes:
+  mongodb_data:

@@ -1,0 +1,171 @@
+%YAML 1.2
+# Made with YAML 1.2.2
+---
+# SPDX-License-Identifier: MPL-2.0
+# Copyright (c) Imperium42®, LLC.
+selfHosted:
+  isSelfHosted: true
+  portalSecretKey: "YOUR_PORTAL_SECRET_KEY" # Generate a secure random string, then dupe to your portal repo's .env
+  authedRedirectUri: "http://localhost:55554"
+  logBotReplies: false # Logs to platforms.discord.modLogsChannelId
+  showJsonInReply: false
+  extraLogs: true
+  printThisJsonOnInit: false
+  printThisYamlOnInit: false
+  logReactions: false # For testing - gets spammy
+  timers:
+    pollingCooldownSecs: 10 # Recommended 30 for prod
+    pollingMs: 30000 # Recommended 300000 for prod
+  localServers:
+    ip: "localhost"
+    port: "55554"
+  mongodb:
+    # Local or Atlas are both ok; only *tested* to work in Atlas
+    dbName: "dragonclaim"
+    uri: "mongodb://mongodb:27017/${selfHosted.mongodb.dbName}"
+    #uri: "mongodb+srv://YOUR_USER:YOUR_PASS@cluster0.YOUR_CLUSTER_ID.mongodb.net/YOUR_COL_NAME?retryWrites=true&w=majority"
+  redis:
+    uri: "redis://redis_db:6379" # Default connection if using docker-compose.yml
+    password: null
+  discordBot:
+    giveawayRedirectUri: "http://localhost:55554/discord/v1/giveaway/authed"
+    portalRedirectUri: "http://localhost:55554/discord/v1/portal/authed"
+    clientSecret: "YOUR_CLIENT_SECRET"
+    token: "YOUR_BOT_TOKEN"
+    clientId: "YOUR_CLIENT_ID"
+    richPresenceStatus: "dragonclaim.com"
+  tls:
+    privKeyPemPath: ""
+    fullChainPemPath: ""
+portal:
+  authedRedirectUri: "https://yoursite.com" # Currently self-hosted, but perhaps !later
+  portalCorsWhitelist: # Who can access portal routes?
+    - "https://yoursite.com"
+    - "http://localhost:55554"
+prefs:
+  resumeLiveGiveawaysOnReady: false
+  skipBlacklistIfMod: true
+  cmdPrefix: "."
+  displayGiveaway:
+    allowDupeEmbeds: true # true is great for testing in a private channel
+    allowInitGiveawayToShowEvenNoKeys: false # For testing - in prod, it will look like keys instantly ran out on 1st auth attempt.
+  verification:
+    trustIfSteamOffline: true # Trust check only works if their Steam PC client is running, and only with dev key
+    allowMultiKeyClaimsAsWhitelistedMod: true
+hexColors:
+  blueHexStr: "#308EF2"
+  lightBlueHexStr: "#0099FF"
+  seaGreenHexStr: "#5AF252"
+  indigoHexStr: "#AA017D"
+admin:
+  emails:
+    - "your-email@yoursite.com"
+steam: # Optional, but additional feats/checks performed if provided
+  webApiKey: "YOUR_STEAM_WEB_API_KEY"
+  devApiKey: null
+  appId: "YOUR_STEAM_APP_ID"
+platforms:
+  discord:
+    guildId: "YOUR_DISCORD_GUILD_ID"
+    modChatChannelId: "YOUR_MOD_CHAT_CHANNEL_ID"
+    modBotSpamChannelIds:
+      - "YOUR_MOD_BOT_SPAM_CHANNEL_ID" # 1st is main
+    modLogsChannelId: "YOUR_MOD_LOGS_CHANNEL_ID"
+    authedModRoleId: "YOUR_AUTHED_MOD_ROLE_ID"
+    verifiedEndUserRoleId: "YOUR_VERIFIED_END_USER_ROLE_ID"
+    emotes: # Nested in Discord so we can optionally use <custom emotes> and :emoteTags:
+      accessDeniedEmote: "🚫"
+      failEmote: "❌"
+      aliasEmote: "🥋"
+      kbEmote: "📖"
+      keyEmote: "🔑"
+      outOfKeysEmote: "⌛"
+      gameCtrlEmote: "🎮"
+      lockEmote: "🔒"
+      incomingDataEmote: "⬅"
+      outgoingDataEmote: "➡"
+      rightArrowEmote: "➡"
+      successEmote: "✅"
+      thinkingEmote: "🤔"
+      warnEmote: "⚠"
+      numberEmoteArr:
+        - "1️⃣"
+        - "2️⃣"
+        - "3️⃣"
+        - "4️⃣"
+        - "5️⃣"
+      waitEmote: "⌛"
+locale:
+  modBotSpamChannelNotWhitelistedStr: "🚫 This channel is not whitelisted for mod bot spam."
+  generalIconUrls:
+    companyIcon256Url: "https://i.imgur.com/lWESl7f.png"
+    steamIcon512Url: "https://i.imgur.com/3l3pD0F.png"
+    keyIcon128Url: "https://i.imgur.com/PCn9o8F.png"
+  giveawayConcluded:
+    giveawayConcludedTitleStr: "GIVEAWAY CONCLUDED"
+    giveawayConcludedDescrStr: "⌛ Out of keys!\nThanks for participating"
+    giveawayConcludedEmbedColorHexStr: "#AA017D"
+    giveawayConcludedComeBackSoonImgUrl: "https://i.imgur.com/u6Cfr2V.png"
+    eventNotFoundErrStr: "❌ Event {eventName} not found." # arg {eventName}
+  giveawayGeneralErrHtmlStr: "<p>This is a bit awkward, but it seems that you are disqualified in some form:</p><p>Perhaps you already claimed a key, did not meet the listed qualifications, or have an alt account detected?</p><p>Unfortunately, staff won't be able to assist with this (since it's an automated thing).</p>"
+  giveawayGeneralErrDMStr: "🤔 This is a bit awkward, but it seems that you are disqualified in some form:\nPerhaps you already claimed a key, did not meet the listed qualifications, or have an alt account detected?\nUnfortunately, staff won't be able to assist with this (since it's an automated thing)."
+  displayGiveawayDM:
+    dmAuthTitleStr: "➡ Verify Steam Link"
+    dmAuthDescrStr: "🔑 After authenticated, I'll respond with a key!\nWe only collect your steamId, and you won't even need to leave Discord."
+    dmAuthThumbImgUrl: "https://i.imgur.com/3l3pD0F.png"
+    dmAuthFooterStr: "Permission request to view your SteamID"
+    dmAuthFooterImgUrl: "https://i.imgur.com/lWESl7f.png"
+    dm500Errs:
+      dmErrServer: "<p>If you cancelled, you can always try again from your DM link.</p>"
+      dmErrTryAgain: "<p>Perhaps try again.</p>"
+      dmErrSomethingWentWrong: "<h3>🤔 Something went wrong</h3>"
+      dmErrQuestions: "<p>💡 <b>Questions?</b> support@yoursite.com</p>"
+      dmErrInternalSteamBlacklistMsg: "!Trusted by Steam"
+      dmErrInternalAllKeysClaimedReasonStr: "All Keys Claimed (System)"
+      dmErrAllKeysClaimedStr: "Gah, all available keys have been claimed!"
+      dmErrAlreadyOwnStr: "<p>Seems like you <em>already</em> own the game -- well, this is awkward...</p>"
+      dmErrSteamNotLinked: "<p>Your Steam account is not linked to Discord. Connect, then try again:</p><p><b>Users -> Connections -></b> Click the Steam logo.</b><p><img src='https://i.imgur.com/IJ88qSf.png' alt='connections'></p>"
+      dmErrUnsuccessfulClaim: "Unsuccessful Claim: Perhaps a bug? Try again or tell a dev!"
+      dmErr1PossiblyExpiredLinkNoState: "[1] Did you already claim a key? If not, the link may be expired! Try starting over~"
+      dmErr2PossiblyExpiredLinkWithState: "[2] Did you already claim a key? If not, the link may be expired! Try starting over~"
+    dmAuthSuccess:
+      dmSuccessContentHeresYourKey: "Your steam key:"
+      dmSuccessHtmlStr: "<h2>Verified!</h2>\n<p>We just replied to your DM with a Steam key - don't forget to <a href=\"https://store.steampowered.com/account/registerkey?key={steamKey}\">activate it</a>!</p>" # arg {steamKey}
+      dmAuthSuccessTitleStr: "✅ Verified!"
+      dmAuthSuccessDescrStr: "Activate your key [on Steam](https://store.steampowered.com/account/registerkey?key={steamKey})" # arg {steamKey}
+      dmAuthSuccessDesktopPrimaryHeaderStr: "Desktop"
+      dmAuthSuccessMobileOptionalHeaderStr: "Mobile"
+      dmAuthSuccessDesktopPrimaryStr: null
+      dmAuthSuccessMobileOptionalStr: null
+      dmAuthSuccessThumbImgUrl: "https://i.imgur.com/3l3pD0F.png"
+      dmAuthSuccessFooterStr: "Questions? support@yoursite.com"
+      dmPlayerKeyStrObj:
+        dmActivateThisKeyOnSteamStr: "**Activate this key on Steam:**\n```less\n🔑```"
+        dmAllVerifiedStr: "✅ You're all verified! Check your DM for the key."
+    dmAuthExpired:
+      dmAuthExpiredTitleStr: "⚠ Link Expired"
+      dmAuthExpiredDescrStr: "Try 'reacting' to the key [🔑] emote again (or perhaps the giveaway ended)."
+      dmAuthExpiredColor: "#AA017D"
+      dmAuthExpiredThumbImgUrl: "https://i.imgur.com/WUIhBYb.png"
+  displayGiveawayEmbed:
+    displayGiveawayEmbedTitle: "➡ Steam Key Giveaway __RULES:__"
+    displayGiveawayEmbedAuthor:
+      name: "Your Game Name"
+      imgIconUrl: null
+      clickUrl: "https://www.yoursite.com"
+    displayGiveawayEmbedThumbnailUrl: "https://i.imgur.com/PCn9o8F.png"
+    displayGiveawayEmbedDescr: "React to enter!"
+    displayGiveawayEmbedRulesArr:
+      - "1️⃣ Discord<>Steam Linked"
+      - "2️⃣ Game Unowned"
+      - "3️⃣ Steam acct is lvl 1+"
+    displayGiveawayEmbedInstructionsArr:
+      - "[ 🔑 ] React below to request a key."
+      - "<@YOUR_BOT_ID> will DM you to verify Steam link."
+      - "<@YOUR_BOT_ID> will DM your claimed key!"
+    displayGiveawayEmbedFooter:
+      footerStr: "By entering, you agree to adhere to our terms @ https://your.legal.short.url"
+      footerImgIconUrl: "https://i.imgur.com/lWESl7f.png"
+  unauthorized: "🚫 Unauthorized attempt logged."
+  cmds:
+    displayGiveawayCmd: {}

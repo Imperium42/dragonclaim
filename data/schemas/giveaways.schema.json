@@ -1,0 +1,78 @@
+{
+  "$jsonSchema": {
+    "bsonType": "object",
+    "required": ["eventId", "name", "startTime", "endTime", "keys", "status"],
+    "properties": {
+      "eventId": {
+        "bsonType": "string",
+        "description": "Unique identifier for the giveaway event"
+      },
+      "name": {
+        "bsonType": "string",
+        "description": "Name of the giveaway event"
+      },
+      "description": {
+        "bsonType": "string",
+        "description": "Description of the giveaway event"
+      },
+      "startTime": {
+        "bsonType": "date",
+        "description": "When the giveaway starts"
+      },
+      "endTime": {
+        "bsonType": "date",
+        "description": "When the giveaway ends"
+      },
+      "keys": {
+        "bsonType": "array",
+        "items": {
+          "bsonType": "object",
+          "required": ["key", "status"],
+          "properties": {
+            "key": {
+              "bsonType": "string",
+              "description": "The actual key code"
+            },
+            "status": {
+              "bsonType": "string",
+              "description": "Status of the key (unclaimed, claimed, invalid)"
+            },
+            "claimedBy": {
+              "bsonType": "string",
+              "description": "Discord ID of user who claimed the key"
+            },
+            "claimedAt": {
+              "bsonType": "date",
+              "description": "When the key was claimed"
+            }
+          }
+        }
+      },
+      "status": {
+        "bsonType": "string",
+        "description": "Status of the giveaway (pending, active, ended)"
+      },
+      "createdBy": {
+        "bsonType": "string",
+        "description": "Discord ID of moderator who created the giveaway"
+      },
+      "createdAt": {
+        "bsonType": "date",
+        "description": "When the giveaway was created"
+      },
+      "settings": {
+        "bsonType": "object",
+        "properties": {
+          "requireVerification": {
+            "bsonType": "bool",
+            "description": "Whether users need to be verified to claim"
+          },
+          "maxClaimsPerUser": {
+            "bsonType": "int",
+            "description": "Maximum number of keys a user can claim"
+          }
+        }
+      }
+    }
+  }
+} 

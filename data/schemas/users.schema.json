@@ -1,0 +1,49 @@
+{
+  "$jsonSchema": {
+    "bsonType": "object",
+    "required": ["discordId", "steamId", "username", "isMod", "isBlacklisted"],
+    "properties": {
+      "discordId": {
+        "bsonType": "string",
+        "description": "Discord user ID"
+      },
+      "steamId": {
+        "bsonType": "string",
+        "description": "Steam user ID"
+      },
+      "username": {
+        "bsonType": "string",
+        "description": "Discord username"
+      },
+      "isMod": {
+        "bsonType": "bool",
+        "description": "Whether the user is a moderator"
+      },
+      "isBlacklisted": {
+        "bsonType": "bool",
+        "description": "Whether the user is blacklisted"
+      },
+      "lastClaim": {
+        "bsonType": "date",
+        "description": "Timestamp of last key claim"
+      },
+      "claims": {
+        "bsonType": "array",
+        "items": {
+          "bsonType": "object",
+          "required": ["gameId", "timestamp"],
+          "properties": {
+            "gameId": {
+              "bsonType": "string",
+              "description": "Game ID"
+            },
+            "timestamp": {
+              "bsonType": "date",
+              "description": "Claim timestamp"
+            }
+          }
+        }
+      }
+    }
+  }
+} 

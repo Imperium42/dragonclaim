@@ -1,0 +1,91 @@
+{
+	"name": "dragonclaim",
+	"description": "Smart Discord promo key dispenser bot",
+	"main": "src/server.js",
+	"type": "module",
+	"version": "0.8.0",
+	"license": "MPL-2.0",
+	"engines": {
+		"node": ">=24"
+	},
+	"private": true,
+	"author": {
+		"name": "Dylan Hunt (Imperium42 LLC)",
+		"email": "dylan@imperium42.com",
+		"url": "https://www.imperium42.com"
+	},
+	"homepage": "https://www.imperium42.com",
+	"nodemonConfig": {
+		"ignore": [
+			"dist",
+			"src/data/downloads/*",
+			"data/downloads/*",
+			"logs/*"
+		],
+		"delay": 2500
+	},
+	"proxy": "http://localhost:55554",
+	"scripts": {
+		"dev": "bun run prereqs && bun run docker-redis-up && bun run docker-mongo-up && bun run mongo-init && bun run build && DOCKER_ENV=false bun run start-standalone",
+		"prereqs": "node ./utils/check-docker.mjs",
+		"docker-up": "docker-compose up -d --remove-orphans",
+		"docker-down": "docker-compose down",
+		"docker-redis-up": "echo 'Starting redis standalone via Docker...' && docker-compose -f docker-compose-redis.yml up -d --remove-orphans",
+		"docker-redis-down": "docker-compose -f docker-compose-redis.yml down",
+		"docker-mongo-up": "echo 'Starting mongo standalone via Docker...' && docker-compose -f docker-compose-mongo.yml up -d --remove-orphans",
+		"docker-mongo-down": "docker-compose -f docker-compose-mongo.yml down",
+		"docker-list": "docker ps",
+		"test": "bun run build && mocha",
+		"start-standalone": "echo 'Starting Dragonclaim bot...'; node dist/server.js",
+		"start-standalone-debug": "echo 'Starting Dragonclaim bot (debug)...'; node --inspect dist/server.js",
+		"build": "echo Building... && bun run build-copy-src-to-dist && tsc --incremental",
+		"build-copy-src-to-dist": "node utils/build-copy.js",
+		"typecheck": "tsc --noEmit",
+		"lint": "eslint src test utils scripts",
+		"clean": "eslint --fix --quiet src test utils scripts",
+		"clean-build": "rm -rf dist && bun run build",
+		"pm2-start": "pm2 start dist/server.js",
+		"pm2-list": "pm2 list",
+		"pm2-stop": "pm2 stop dist/server.js",
+		"mongo-init": "node scripts/init-mongo.js",
+		"format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,json,yml,yaml}\"",
+		"format:check": "prettier --check \"src/**/*.{js,jsx,ts,tsx,json,yml,yaml}\""
+	},
+	"dependencies": {
+		"axios": "^1.21.1",
+		"cookie-parser": "^1.4.7",
+		"cors": "^2.8.6",
+		"discord-oauth2": "^2.12.1",
+		"discord.js": "^14.28.1",
+		"express": "^5.3.0",
+		"express-rate-limit": "^8.7.5",
+		"helmet": "^8.3.0",
+		"moment": "^2.31.0",
+		"mongodb": "^7.9.1",
+		"pug": "^3.0.4",
+		"redis": "^6.4.0",
+		"serve-favicon": "^2.5.1",
+		"yaml": "^2.9.1"
+	},
+	"devDependencies": {
+		"@eslint/js": "^10.0.1",
+		"@types/node": "^24.19.2",
+		"chai": "^6.3.0",
+		"eslint": "^10.15.0",
+		"eslint-config-prettier": "^10.1.8",
+		"fs-extra": "^11.4.1",
+		"globals": "^17.14.0",
+		"mocha": "^12.0.3",
+		"nodemon": "^3.1.14",
+		"pm2": "^7.1.2",
+		"prettier": "^3.10.1",
+		"typescript": "~6.0.3",
+		"typescript-eslint": "^8.74.0"
+	},
+	"packageManager": "bun@1.4.5",
+	"overrides": {
+		"glob": "^14.0.6",
+		"minimatch": "^11.0.9"
+	},
+	"//overrides": "Dev-tool transitive deps forced past GHSA-3g3m-2fjr-6pw4 (glob) / GHSA-g3hv-75wg-m249 (minimatch); drop once mocha/eslint/nodemon ship them"
+}

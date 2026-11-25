@@ -1,0 +1,27 @@
+{
+	"compilerOptions": {
+		"outDir": "./dist",
+		"tsBuildInfoFile": "./dist/tsconfig.tsbuildinfo",
+		"rootDir": "./src",
+		"target": "ES2024",
+		"sourceMap": true,
+		"allowJs": true,
+		"strict": true,
+		"forceConsistentCasingInFileNames": true,
+		"noFallthroughCasesInSwitch": true,
+		"esModuleInterop": true,
+		"moduleResolution": "nodenext",
+		"resolveJsonModule": true,
+		"module": "nodenext",
+		"allowSyntheticDefaultImports": true,
+		"noImplicitAny": false
+	},
+	"include": [
+		"./src/**/*"
+	],
+	"exclude": [
+		"dist",
+		"node_modules",
+		"test"
+	]
+}

@@ -1,0 +1,24 @@
+# SPDX-License-Identifier: MPL-2.0
+# Copyright (c) Imperium42®, LLC.
+##############################################################################################
+# Runs mongodb *only*; not the app:
+# docker-compose -f docker-compose-mongo.yml up -d --remove-orphans
+#
+# -d means "detached" mode, so you can close the terminal and it will keep running.
+# --remove-orphans means "don't keep old containers around if they're not in the new config"
+##############################################################################################
+services:
+  mongodb:
+    image: mongo:8
+    restart: unless-stopped # auto-recover after crashes/host reboots
+    container_name: dragonclaim-mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    environment:
+      - MONGO_INITDB_DATABASE=dragonclaim
+    command: mongod --bind_ip_all
+
+volumes:
+  mongodb_data: 

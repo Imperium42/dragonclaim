@@ -1,0 +1,55 @@
+# Version control
+.git
+.gitignore
+
+# Dependencies
+node_modules
+
+# Build outputs
+dist/
+build/
+
+# Config files (these should be mounted or set via env vars)
+data/config.yml
+data/*.yml
+!data/config.template.yml
+!data/schemas/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+# Environment files
+.env
+.env.local
+.env.production
+
+# Test coverage
+coverage/
+.nyc_output/
+
+# Docker files
+Dockerfile
+docker-compose*.yml
+.dockerignore
+
+# Documentation
+*.md
+!README.md
+!CLAUDE.md
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Local secrets checkout: the Dockerfile clones a fresh copy instead
+data/dc-prod-secrets/

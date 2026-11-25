@@ -1,0 +1,15 @@
+//- SPDX-License-Identifier: MPL-2.0
+//- Copyright (c) Imperium42®, LLC.
+extends layout
+
+block content
+    h1= title
+    form(name= form, method="post")
+        div.input
+            span.label Email
+                input(type="email", name="email")
+        div.actions
+            br
+            input(type="submit", value="Check Status")
+    br
+    br
