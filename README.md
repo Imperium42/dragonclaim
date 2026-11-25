@@ -112,7 +112,7 @@ platforms:
 ### For Moderators
 
 - **Customizable**: Full YAML configuration with localization
-- **Admin Portal**: GUI configuration interface
+- **Admin Portal**: GUI configuration interface ([separate repo](#web-portal-separate-repo))
 - **Event Management**: Natural language timer support
 - **Pre-scheduling**: Create and schedule events ahead of time
 - **Verification Tools**: Bot detection and duplicate claim prevention
@@ -155,6 +155,26 @@ If you see "connection < monitor > to {someIp} closed":
 
 - ESM module: Import TypeScript files with `.js` extension
 - Schema initialization: `data/schemas` → `scripts/init-mongo.js`
+
+## Web Portal (separate repo)
+
+The admin portal (the GUI config frontend) lives in a **separate, private repository** and is
+not part of this release. This repo only contains the bot and the API the portal talks to:
+
+| Endpoint                                 | Purpose                                         |
+| ---------------------------------------- | ----------------------------------------------- |
+| `GET /discord/v1/portal/auth`            | Starts Discord OAuth2 (sets a state cookie)     |
+| `GET /discord/v1/portal/authed`          | OAuth2 callback; issues a one-time nonce        |
+| `GET /discord/v1/portal/user`            | Redeems the nonce (`?discordNonce=`)            |
+| `GET`/`POST /discord/v1/portal/config`   | Reads/overwrites the bot config (key required)  |
+
+If you build or revive a portal against this API:
+
+- Send the key in the **`x-portal-secret-key` header**. The old `?portalSecretKey=` query param
+  and body field no longer authenticate (see [CHANGELOG](CHANGELOG.md) → Breaking).
+- The config API stays disabled (`503`) until `selfHosted.portalSecretKey` is a real value of
+  32+ characters.
+- Add the portal's origin to `portal.portalCorsWhitelist`, or the browser gets no CORS access.
 
 ## Roadmap
 
