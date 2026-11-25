@@ -10,14 +10,16 @@ import { MongoClient, ServerApiVersion } from "mongodb";
 import moment from "moment";
 import { waitSecs } from "../controllers/chronos.js";
 import { checkHasModRoleFromDiscordId, guildId } from "../controllers/discord/guildInfo.js";
-import { getCachedConfigJson, JsonStringify } from "../controllers/i42Common.js";
+import { getCachedConfigJson, JsonStringify, toHostReachableUri } from "../controllers/i42Common.js";
 // import DragonclaimUser from '../models/DragonclaimUser.js';
 
 // Secrets >>
 const { selfHosted } = getCachedConfigJson();
 
 const mongodbKeys = selfHosted.mongodb;
-const { dbName, uri } = mongodbKeys;
+const { dbName } = mongodbKeys;
+// On the host (no DOCKER_ENV), the Compose `mongodb` hostname is rewritten to localhost
+const uri = toHostReachableUri(mongodbKeys.uri);
 
 // Mongo DB >>
 const connectOpts = {

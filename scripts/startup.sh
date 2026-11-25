@@ -32,7 +32,7 @@ if [ -f "$CONFIG_FILE" ]; then
 else
     echo "❌ ERROR: Config file not found at: $CONFIG_FILE"
     echo "Options:"
-    echo "  1. Set CONFIG_PATH env var to point to your config"
+    echo "  1. Set CONFIG_YML env var to point to your config"
     echo "  2. Add private-config submodule with config.prod.yml"
     echo "  3. Place config.prod.yml in data/ directory"
     exit 1

@@ -49,7 +49,7 @@ In Coolify, use **Storages → File Mount** and set the same `CONFIG_YML` path.
 | Variable          | Required        | Purpose                                                                                   |
 | ----------------- | --------------- | ----------------------------------------------------------------------------------------- |
 | `NODE_ENV`        | yes             | `production` (selects the config file and runs `init-mongo.js` on boot)                   |
-| `DOCKER_ENV`      | if Redis is `redis_db` | `true` keeps the `redis_db` hostname. Otherwise it is rewritten to `localhost` for host runs |
+| `DOCKER_ENV`      | if using Compose hostnames | `true` keeps the `redis_db`/`mongodb` hostnames. Otherwise they're rewritten for host runs (`localhost:6380` for `redis_db:6379`, `localhost` for `mongodb`) |
 | `CONFIG_YML`      | Option 2        | **Path** to the config file inside the container                                          |
 | `TRUST_PROXY`     | behind a proxy  | Number of reverse-proxy hops (Coolify/Traefik: `1`), so rate limiting sees real client IPs. Leave unset when the container is exposed directly |
 

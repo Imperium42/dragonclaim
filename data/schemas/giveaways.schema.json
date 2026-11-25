@@ -1,78 +1,32 @@
 {
   "$jsonSchema": {
     "bsonType": "object",
-    "required": ["eventId", "name", "startTime", "endTime", "keys", "status"],
+    "required": ["_id", "guildId", "eventName", "keysArr", "claimersArr"],
     "properties": {
-      "eventId": {
-        "bsonType": "string",
-        "description": "Unique identifier for the giveaway event"
-      },
-      "name": {
-        "bsonType": "string",
-        "description": "Name of the giveaway event"
-      },
-      "description": {
-        "bsonType": "string",
-        "description": "Description of the giveaway event"
-      },
-      "startTime": {
-        "bsonType": "date",
-        "description": "When the giveaway starts"
-      },
-      "endTime": {
-        "bsonType": "date",
-        "description": "When the giveaway ends"
-      },
-      "keys": {
+      "_id": { "bsonType": "string", "description": "eventId: \"{guildId}-{eventName}\"" },
+      "guildId": { "bsonType": "string", "description": "Discord guild ID" },
+      "eventName": { "bsonType": "string", "description": "Name given in .setupgiveaway" },
+      "isLive": { "bsonType": "bool" },
+      "dates": { "bsonType": "object", "description": "Duration + start/end (null until displayed)" },
+      "liveInChannelId": { "bsonType": ["string", "null"] },
+      "embedMsgId": { "bsonType": ["string", "null"] },
+      "reqsObj": { "bsonType": "object" },
+      "initKeyCount": { "bsonType": ["int", "long", "double"] },
+      "keysArr": { "bsonType": "array", "items": { "bsonType": "string" }, "description": "Unclaimed keys" },
+      "endReason": { "bsonType": ["string", "null"] },
+      "claimersArr": {
         "bsonType": "array",
         "items": {
           "bsonType": "object",
-          "required": ["key", "status"],
+          "required": ["discordId", "claimedKey"],
           "properties": {
-            "key": {
-              "bsonType": "string",
-              "description": "The actual key code"
-            },
-            "status": {
-              "bsonType": "string",
-              "description": "Status of the key (unclaimed, claimed, invalid)"
-            },
-            "claimedBy": {
-              "bsonType": "string",
-              "description": "Discord ID of user who claimed the key"
-            },
-            "claimedAt": {
-              "bsonType": "date",
-              "description": "When the key was claimed"
-            }
-          }
-        }
-      },
-      "status": {
-        "bsonType": "string",
-        "description": "Status of the giveaway (pending, active, ended)"
-      },
-      "createdBy": {
-        "bsonType": "string",
-        "description": "Discord ID of moderator who created the giveaway"
-      },
-      "createdAt": {
-        "bsonType": "date",
-        "description": "When the giveaway was created"
-      },
-      "settings": {
-        "bsonType": "object",
-        "properties": {
-          "requireVerification": {
-            "bsonType": "bool",
-            "description": "Whether users need to be verified to claim"
-          },
-          "maxClaimsPerUser": {
-            "bsonType": "int",
-            "description": "Maximum number of keys a user can claim"
+            "discordId": { "bsonType": "string" },
+            "steamId": { "bsonType": ["string", "null"] },
+            "claimedDateObj": { "bsonType": "date" },
+            "claimedKey": { "bsonType": "string" }
           }
         }
       }
     }
   }
-} 
+}

@@ -50,16 +50,27 @@ async function initMongo() {
       }
     }
     
-    // Create indexes
-    await db.collection('users').createIndex({ discordId: 1 }, { unique: true });
-    await db.collection('blacklists').createIndex({ userId: 1 }, { unique: true });
-    await db.collection('giveaways').createIndex({ eventId: 1 }, { unique: true });
-    await db.collection('guilds').createIndex({ guildId: 1 }, { unique: true });
-    
+    // Create indexes. _id already is the natural unique key for giveaways (eventId),
+    // guilds (guildId) and discordBlacklists (discordId); users are upserted by discordUser.id.
+    await db.collection('users').createIndex({ 'discordUser.id': 1 }, { unique: true });
+
+    // Drop unique indexes created by older versions of this script on fields the bot never
+    // writes: every doc indexed as null, so the 2nd insert failed with a duplicate key.
+    const staleIndexes = [
+      ['users', 'discordId_1'],
+      ['giveaways', 'eventId_1'],
+      ['guilds', 'guildId_1'],
+    ];
+    for (const [col, idx] of staleIndexes) {
+      await db.collection(col).dropIndex(idx).catch((e) => {
+        if (e.codeName !== 'IndexNotFound' && e.codeName !== 'NamespaceNotFound') throw e; // Absent on fresh DBs
+      });
+    }
+
     console.log('Created indexes on collections');
     
     // Insert test data if collections are empty (never in production: it'd seed fake users/guilds)
-    const collections = process.env.NODE_ENV === 'production' ? [] : ['users', 'blacklists', 'giveaways', 'guilds'];
+    const collections = process.env.NODE_ENV === 'production' ? [] : ['users', 'guilds'];
     for (const collection of collections) {
       const count = await db.collection(collection).countDocuments();
       if (count === 0) {
@@ -68,12 +79,9 @@ async function initMongo() {
         switch(collection) {
           case 'users':
             await db.collection(collection).insertOne({
-              discordId: '123456789',
-              username: 'TestUser',
-              steamId: '76561198123456789',
-              isMod: false,
-              isBlacklisted: false,
-              claims: []
+              discordUser: { id: '123456789', username: 'TestUser' },
+              src: {},
+              guildsArr: [],
             });
             break;
           case 'guilds':

@@ -4,15 +4,14 @@
 // services/redis.js
 // #############################################################################################################
 
-import { getCachedConfigJson, redactUri } from "../controllers/i42Common.js";
+import { getCachedConfigJson, redactUri, toHostReachableUri } from "../controllers/i42Common.js";
 import { createClient } from "redis"; // https://www.npmjs.com/package/redis
 
 const { selfHosted } = getCachedConfigJson();
 const { redis } = selfHosted;
 
-// Check if we're running in Docker or on the host
-const isDocker = process.env.DOCKER_ENV === "true";
-const redisUri = isDocker ? redis.uri : redis.uri.replace("redis_db", "localhost");
+// On the host (no DOCKER_ENV), Compose hostnames are rewritten to the published localhost ports
+const redisUri = toHostReachableUri(redis.uri);
 
 const redisOpts = {
 	url: redisUri,

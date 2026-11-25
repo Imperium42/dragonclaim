@@ -157,8 +157,8 @@ locale:
     displayGiveawayEmbedDescr: "React to enter!"
     displayGiveawayEmbedRulesArr:
       - "1️⃣ Discord<>Steam Linked"
-      - "2️⃣ Game Unowned"
-      - "3️⃣ Steam acct is lvl 1+"
+      - "2️⃣ One key per person"
+      - "3️⃣ Steam acct in good standing"
     displayGiveawayEmbedInstructionsArr:
       - "[ 🔑 ] React below to request a key."
       - "<@YOUR_BOT_ID> will DM you to verify Steam link."

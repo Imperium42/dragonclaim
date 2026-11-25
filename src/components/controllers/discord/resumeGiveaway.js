@@ -6,7 +6,7 @@
 
 import moment from "moment";
 import { awaitReactionsAsync } from "./cmds/displayGiveawayCmd.js";
-import endGiveawayAsync from "./cmds/endGiveawayCmd.js";
+import { endGiveawayAsync } from "./cmds/endGiveawayCmd.js";
 import { getMsgMgrByChannelIdAndMsgId } from "./discordClient.js";
 import { getFirstGiveawayLive } from "../../services/dbAtlas.js";
 import { JsonStringify } from "../i42Common.js";

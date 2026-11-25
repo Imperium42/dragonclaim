@@ -237,7 +237,8 @@ const handleAuthedGiveawayAsync = async (
 		);
 
 		if (alreadyClaimed) {
-			return null;
+			// Throw like the other checks so the catch answers the request (returning hung it)
+			throw dm500Errs.dmErr2PossiblyExpiredLinkWithState;
 		}
 
 		// --------------------------------

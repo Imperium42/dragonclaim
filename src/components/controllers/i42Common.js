@@ -227,6 +227,21 @@ const redactConfig = (_val, _key = "") => {
 const redactUri = (_uri) => String(_uri).replace(/\/\/[^/\s]*@/, "//***@"); // greedy: up to the last @ before the host
 
 // ........................................................................................
+// The template uses Compose service hostnames (redis_db, mongodb). Those only resolve inside the
+// Compose network, so when the bot runs on the host (`bun run dev`, no DOCKER_ENV) point them at
+// the ports the standalone compose files publish: Redis on 6380, MongoDB on 27017.
+const isDockerEnv = () => process.env.DOCKER_ENV === "true";
+const COMPOSE_HOST_RULES = [
+	[/(\/\/|@)redis_db:6379(?=[/?]|$)/, "$1localhost:6380"],
+	[/(\/\/|@)redis_db(?=[:/?]|$)/, "$1localhost"],
+	[/(\/\/|@)mongodb(?=[:/?]|$)/, "$1localhost"],
+];
+const toHostReachableUri = (_uri) =>
+	isDockerEnv()
+		? _uri
+		: COMPOSE_HOST_RULES.reduce((uri, [re, to]) => uri.replace(re, to), String(_uri));
+
+// ........................................................................................
 const getHtmlContentType = () => {
 	return { "content-type": "text/html; charset=utf-8" };
 };
@@ -271,6 +286,8 @@ export {
 	escapeHtml,
 	redactUri,
 	redactConfig,
+	isDockerEnv,
+	toHostReachableUri,
 	getHtmlContentType,
 	safeStringify,
 	getPathToConfigYml,

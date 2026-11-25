@@ -1,0 +1,12 @@
+{
+  "$jsonSchema": {
+    "bsonType": "object",
+    "required": ["_id"],
+    "properties": {
+      "_id": { "bsonType": "string", "description": "Discord user ID" },
+      "reason": { "bsonType": ["string", "null"] },
+      "steamId": { "bsonType": ["string", "null"] },
+      "email": { "bsonType": ["string", "null"] }
+    }
+  }
+}

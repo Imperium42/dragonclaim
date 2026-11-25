@@ -75,9 +75,29 @@ Changes before this file existed are recorded in the git history only.
   request bodies). `GET` rethrows the original error.
 - `tsc --incremental` kept its build info outside `dist/`, so `clean-build` (`rm -rf dist` + build)
   silently skipped emitting TypeScript output. The build info now lives in `dist/`.
-
 - `init-mongo.js`: the seed guild never matched the schema (it used an ObjectId `_id`), so
   init exited with "Document failed validation" on every fresh DB.
+- **MongoDB validators didn't match what the bot writes**, so on any DB set up by
+  `init-mongo.js`, `.setupgiveaway` and portal user upserts were rejected ("Document failed
+  validation"). Unique indexes on fields the bot never sets (`giveaways.eventId`,
+  `guilds.guildId`, `users.discordId`) also made the 2nd document collide on `null`. The
+  `giveaways`, `users` and `discordBlacklists` (renamed from the never-used `blacklists`) schemas
+  now describe the real documents. `users` is uniquely indexed on `discordUser.id`, and init drops
+  the stale indexes from older runs.
+- Resuming a giveaway that expired while the bot was down called the `.endgiveaway` command handler
+  with the wrong arguments instead of `endGiveawayAsync`.
+- A claim that failed the last-second "already claimed" re-check never got a response, so the
+  browser hung. It now gets the usual error page.
+- `.displaygiveaway`'s "live now" reply showed `0/undefined` keys.
+- `startup.sh`'s "config not found" help mentioned a `CONFIG_PATH` env var. It's `CONFIG_YML`.
+- `bun run dev` couldn't connect with the template's defaults:
+  - `docker-mongo-up` used `--remove-orphans`, and both standalone compose files share one project,
+    so starting Mongo deleted the Redis container that had just started.
+  - On the host, `redis_db:6379` was rewritten to `localhost:6379`, but the container publishes
+    `6380`. The `mongodb` hostname wasn't rewritten at all.
+  Host runs now map `redis_db:6379` → `localhost:6380` and `mongodb` → `localhost`.
+- The template's default giveaway rules advertised checks the bot doesn't make ("Game Unowned",
+  "lvl 1+"). They now list what is enforced.
 
 ### Breaking
 

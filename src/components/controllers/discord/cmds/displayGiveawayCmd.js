@@ -296,7 +296,7 @@ const displayGiveawayAsync = async (_eventName, _channelId, _prepGiveawayStr, _b
 	const momentSm = `${setupObj.dates.eventDurationInt}${dates.eventDurationTypeChar}`;
 
 	const numKeysClaimed = setupObj.claimersArr && setupObj.claimersArr.length;
-	const keysAvail = `${keyEmote} ${numKeysClaimed}/${setupObj.initKeyCount.length}`;
+	const keysAvail = `${keyEmote} ${numKeysClaimed}/${setupObj.initKeyCount}`;
 
 	_botCmd.msg.reply(
 		` ${successEmote} Displaying live now for \`${momentSm}\`:` +
